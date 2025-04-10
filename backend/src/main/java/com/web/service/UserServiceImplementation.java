@@ -5,19 +5,19 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.zosh.exception.ProjectException;
+import com.web.exception.ProjectException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.zosh.config.JwtProvider;
-import com.zosh.exception.UserException;
-import com.zosh.model.PasswordResetToken;
-import com.zosh.model.User;
-import com.zosh.repository.PasswordResetTokenRepository;
-import com.zosh.repository.UserRepository;
+import com.web.config.JwtProvider;
+import com.web.exception.UserException;
+import com.web.model.PasswordResetToken;
+import com.web.model.User;
+import com.web.repository.PasswordResetTokenRepository;
+import com.web.repository.UserRepository;
 
 @Service
 public class UserServiceImplementation implements UserService {

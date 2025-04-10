@@ -3,8 +3,8 @@ package com.web.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zosh.model.PasswordResetToken;
-import com.zosh.repository.PasswordResetTokenRepository;
+import com.web.model.PasswordResetToken;
+import com.web.repository.PasswordResetTokenRepository;
 @Service
 public class PasswordResetTokenServiceImplementation implements PasswordResetTokenService {
 	@Autowired

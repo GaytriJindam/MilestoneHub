@@ -2,12 +2,12 @@ package com.web.service;
 
 import java.util.List;
 
-import com.zosh.exception.ChatException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Chat;
-import com.zosh.model.Project;
-import com.zosh.model.User;
+import com.web.exception.ChatException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Chat;
+import com.web.model.Project;
+import com.web.model.User;
 
 public interface ProjectService {
 	Project createProject(Project project, Long userId) throws UserException;

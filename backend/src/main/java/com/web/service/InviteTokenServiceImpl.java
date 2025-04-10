@@ -1,12 +1,12 @@
 package com.web.service;
 
-import com.zosh.exception.MailsException;
+import com.web.exception.MailsException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zosh.model.Invitation;
-import com.zosh.repository.InviteTokenRepository;
+import com.web.model.Invitation;
+import com.web.repository.InviteTokenRepository;
 
 import java.util.UUID;
 

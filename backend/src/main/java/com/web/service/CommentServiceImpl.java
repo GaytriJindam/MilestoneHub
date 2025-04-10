@@ -1,13 +1,13 @@
 package com.web.service;
 
-import com.zosh.exception.IssueException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Comment;
-import com.zosh.model.Issue;
-import com.zosh.model.User;
-import com.zosh.repository.CommentRepository;
-import com.zosh.repository.IssueRepository;
-import com.zosh.repository.UserRepository;
+import com.web.exception.IssueException;
+import com.web.exception.UserException;
+import com.web.model.Comment;
+import com.web.model.Issue;
+import com.web.model.User;
+import com.web.repository.CommentRepository;
+import com.web.repository.IssueRepository;
+import com.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

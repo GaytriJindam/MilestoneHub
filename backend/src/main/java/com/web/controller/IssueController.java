@@ -2,7 +2,7 @@ package com.web.controller;
 
 import java.util.List;
 
-import com.zosh.response.AuthResponse;
+import com.web.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zosh.DTO.IssueDTO;
-import com.zosh.exception.IssueException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Issue;
-import com.zosh.model.User;
-import com.zosh.repository.MessageRepository;
-import com.zosh.request.IssueRequest;
-import com.zosh.response.MessageResponse;
-import com.zosh.service.IssueService;
-import com.zosh.service.UserService;
+import com.web.DTO.IssueDTO;
+import com.web.exception.IssueException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Issue;
+import com.web.model.User;
+import com.web.request.IssueRequest;
+import com.web.service.IssueService;
+import com.web.service.UserService;
 
 @RestController
 @RequestMapping("/api/issues")

@@ -1,7 +1,7 @@
 package com.web.service;
 
-import com.zosh.exception.MailsException;
-import com.zosh.model.Invitation;
+import com.web.exception.MailsException;
+import com.web.model.Invitation;
 import jakarta.mail.MessagingException;
 
 public interface InvitationService {

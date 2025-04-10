@@ -1,9 +1,9 @@
 package com.web.controller;
 
 
-import com.zosh.model.Subscription;
-import com.zosh.repository.SubscriptionRepository;
-import com.zosh.service.SubscriptionService;
+import com.web.model.Subscription;
+import com.web.repository.SubscriptionRepository;
+import com.web.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zosh.config.JwtProvider;
-import com.zosh.exception.UserException;
-import com.zosh.model.User;
-import com.zosh.repository.UserRepository;
-import com.zosh.request.LoginRequest;
-import com.zosh.response.AuthResponse;
-import com.zosh.service.CustomeUserServiceImplementation;
-import com.zosh.service.UserService;
+import com.web.config.JwtProvider;
+import com.web.exception.UserException;
+import com.web.model.User;
+import com.web.repository.UserRepository;
+import com.web.request.LoginRequest;
+import com.web.response.AuthResponse;
+import com.web.service.CustomeUserServiceImplementation;
+import com.web.service.UserService;
 
 
 @RestController

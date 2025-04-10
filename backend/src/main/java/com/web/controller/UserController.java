@@ -1,6 +1,6 @@
 package com.web.controller;
 
-import com.zosh.exception.ProjectException;
+import com.web.exception.ProjectException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zosh.exception.UserException;
-import com.zosh.model.User;
-import com.zosh.service.UserService;
+import com.web.exception.UserException;
+import com.web.model.User;
+import com.web.service.UserService;
 
 @RestController
 public class UserController {

@@ -1,8 +1,7 @@
 package com.web.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zosh.domain.PlanType;
-import com.zosh.domain.SubscriptionType;
+import com.web.domain.PlanType;
+import com.web.domain.SubscriptionType;
 import jakarta.persistence.*;
 import lombok.Data;
 

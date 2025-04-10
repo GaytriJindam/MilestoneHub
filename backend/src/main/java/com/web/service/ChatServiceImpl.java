@@ -1,17 +1,10 @@
 package com.web.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zosh.exception.ChatException;
-import com.zosh.exception.ProjectException;
-import com.zosh.model.Chat;
-import com.zosh.model.User;
-import com.zosh.repository.ChatRepository;
-import com.zosh.repository.ProjectRepository;
-import com.zosh.repository.UserRepository;
+import com.web.model.Chat;
+import com.web.repository.ChatRepository;
 
 @Service
 public class ChatServiceImpl implements ChatService {

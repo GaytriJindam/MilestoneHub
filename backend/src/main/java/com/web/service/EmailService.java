@@ -6,7 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.zosh.exception.MailsException;
+import com.web.exception.MailsException;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

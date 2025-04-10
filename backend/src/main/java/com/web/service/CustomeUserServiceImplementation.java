@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.zosh.model.User;
-import com.zosh.repository.UserRepository;
+import com.web.model.User;
+import com.web.repository.UserRepository;
 
 @Service
 public class CustomeUserServiceImplementation implements UserDetailsService {

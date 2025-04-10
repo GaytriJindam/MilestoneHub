@@ -2,7 +2,7 @@ package com.web.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.zosh.model.Invitation;
+import com.web.model.Invitation;
 
 public interface InviteTokenRepository extends JpaRepository<Invitation, Long> {
 

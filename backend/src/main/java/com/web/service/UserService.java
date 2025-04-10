@@ -1,8 +1,8 @@
 package com.web.service;
 
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.User;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.User;
 
 public interface UserService {
 

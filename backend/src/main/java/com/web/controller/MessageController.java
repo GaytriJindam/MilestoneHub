@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zosh.exception.ChatException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Chat;
-import com.zosh.model.Message;
-import com.zosh.model.User;
-import com.zosh.request.CreateMessageRequest;
-import com.zosh.service.MessageService;
-import com.zosh.service.ProjectService;
-import com.zosh.service.UserService;
+import com.web.exception.ChatException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Chat;
+import com.web.model.Message;
+import com.web.model.User;
+import com.web.request.CreateMessageRequest;
+import com.web.service.MessageService;
+import com.web.service.ProjectService;
+import com.web.service.UserService;
 
 @RestController
 @RequestMapping("/api/messages")

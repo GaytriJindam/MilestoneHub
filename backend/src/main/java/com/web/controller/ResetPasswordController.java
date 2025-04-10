@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zosh.exception.UserException;
-import com.zosh.model.PasswordResetToken;
-import com.zosh.model.User;
-import com.zosh.request.ResetPasswordRequest;
-import com.zosh.response.ApiResponse;
-import com.zosh.service.PasswordResetTokenService;
-import com.zosh.service.UserService;
+import com.web.exception.UserException;
+import com.web.model.PasswordResetToken;
+import com.web.model.User;
+import com.web.request.ResetPasswordRequest;
+import com.web.response.ApiResponse;
+import com.web.service.PasswordResetTokenService;
+import com.web.service.UserService;
 
 @RestController
 @RequestMapping("/reset-password")

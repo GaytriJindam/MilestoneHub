@@ -1,6 +1,6 @@
 package com.web.service;
 
-import com.zosh.model.PasswordResetToken;
+import com.web.model.PasswordResetToken;
 
 public interface PasswordResetTokenService {
 

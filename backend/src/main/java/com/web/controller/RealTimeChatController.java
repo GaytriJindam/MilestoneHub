@@ -1,11 +1,8 @@
 package com.web.controller;
 
-import com.zosh.exception.ChatException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Message;
-import com.zosh.service.ChatService;
-import com.zosh.service.MessageService;
-import com.zosh.service.UserService;
+import com.web.exception.ChatException;
+import com.web.exception.UserException;
+import com.web.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;

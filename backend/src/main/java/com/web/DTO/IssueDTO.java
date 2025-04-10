@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.zosh.model.Project;
-import com.zosh.model.User;
+import com.web.model.Project;
+import com.web.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

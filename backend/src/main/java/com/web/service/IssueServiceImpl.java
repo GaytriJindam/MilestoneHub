@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zosh.exception.IssueException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Issue;
-import com.zosh.model.Project;
-import com.zosh.model.User;
-import com.zosh.repository.IssueRepository;
-import com.zosh.request.IssueRequest;
+import com.web.exception.IssueException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Issue;
+import com.web.model.Project;
+import com.web.model.User;
+import com.web.repository.IssueRepository;
+import com.web.request.IssueRequest;
 
 @Service
 public class IssueServiceImpl implements IssueService {

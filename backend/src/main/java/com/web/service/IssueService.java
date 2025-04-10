@@ -3,12 +3,12 @@ package com.web.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.zosh.exception.IssueException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Issue;
-import com.zosh.model.User;
-import com.zosh.request.IssueRequest;
+import com.web.exception.IssueException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Issue;
+import com.web.model.User;
+import com.web.request.IssueRequest;
 
 public interface IssueService {
 //	 List<Issue> getAllIssues() throws IssueException;
