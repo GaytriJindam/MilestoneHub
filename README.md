@@ -69,9 +69,6 @@ Time tracking and reporting dashboard
 💻 Getting Started
 Clone the repo:
 
-bash
-Copy
-Edit
 git clone https://github.com/GaytriJindam/workwise.git
 
 cd workwise
@@ -79,6 +76,7 @@ cd workwise
 Start the backend:
 
 cd backend
+
 ./mvnw spring-boot:run
 
 
@@ -87,4 +85,5 @@ Start the frontend:
 cd frontend
 
 npm install
+
 npm run dev
