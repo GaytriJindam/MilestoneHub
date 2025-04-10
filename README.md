@@ -73,19 +73,18 @@ bash
 Copy
 Edit
 git clone https://github.com/GaytriJindam/workwise.git
+
 cd workwise
+
 Start the backend:
 
-bash
-Copy
-Edit
 cd backend
 ./mvnw spring-boot:run
+
+
 Start the frontend:
 
-bash
-Copy
-Edit
 cd frontend
+
 npm install
-npm start
+npm run dev
