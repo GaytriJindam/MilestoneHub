@@ -12,6 +12,7 @@ View a list of all ongoing, upcoming, and completed projects
 
 Set project milestones and timelines
 
+
 🐞 Issue Tracking System
 Create, assign, and prioritize issues or tasks within projects
 
@@ -20,6 +21,7 @@ Add detailed descriptions, labels (e.g., bug, enhancement), and due dates
 Track issue status: Open, In Progress, Resolved, Closed
 
 Link issues to specific team members or project milestones
+
 
 💬 Real-Time Chat with Coworkers
 Built-in chat module for seamless communication
@@ -30,12 +32,14 @@ Share files, links, and code snippets
 
 Notifications for mentions and project updates
 
+
 👥 Team Collaboration
 View team members assigned to each project
 
 Track workload and task ownership
 
 Share updates and announcements via project-wide messages
+
 
 🛠️ Tech Stack
 Backend: Java (Spring Boot)
@@ -48,6 +52,7 @@ Authentication: JWT / OAuth2 (based on your implementation)
 
 Real-Time Chat: WebSocket / Firebase / Socket.IO (depending on setup)
 
+
 📌 Upcoming Features
 Project Gantt charts and timeline views
 
@@ -56,6 +61,7 @@ File storage integration (Google Drive, Dropbox)
 Email & Slack notifications
 
 Time tracking and reporting dashboard
+
 
 💻 Getting Started
 Clone the repo:
