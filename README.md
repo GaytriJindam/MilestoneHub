@@ -69,7 +69,7 @@ Time tracking and reporting dashboard
 💻 Getting Started
 Clone the repo:
 
-git clone https://github.com/GaytriJindam/workwise.git
+git clone https://github.com/GaytriJindam/WorkWise.git
 
 cd workwise
 
