@@ -1,10 +1,6 @@
 package com.web.service;
 
-import java.util.List;
-
-import com.zosh.exception.ChatException;
-import com.zosh.exception.ProjectException;
-import com.zosh.model.Chat;
+import com.web.model.Chat;
 
 public interface ChatService {
 

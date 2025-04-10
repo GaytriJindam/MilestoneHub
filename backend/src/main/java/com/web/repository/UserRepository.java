@@ -3,7 +3,7 @@ package com.web.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.zosh.model.User;
+import com.web.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	

@@ -1,15 +1,14 @@
 package com.web.service;
 
-import com.zosh.domain.PlanType;
-import com.zosh.domain.SubscriptionType;
-import com.zosh.model.Subscription;
-import com.zosh.model.User;
-import com.zosh.repository.SubscriptionRepository;
+import com.web.domain.PlanType;
+import com.web.domain.SubscriptionType;
+import com.web.model.Subscription;
+import com.web.model.User;
+import com.web.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService{

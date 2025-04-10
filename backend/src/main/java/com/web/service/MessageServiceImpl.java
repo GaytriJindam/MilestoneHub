@@ -6,15 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zosh.exception.ChatException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Chat;
-import com.zosh.model.Message;
-import com.zosh.model.User;
-import com.zosh.repository.ChatRepository;
-import com.zosh.repository.MessageRepository;
-import com.zosh.repository.UserRepository;
+import com.web.exception.ChatException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Chat;
+import com.web.model.Message;
+import com.web.model.User;
+import com.web.repository.MessageRepository;
+import com.web.repository.UserRepository;
 
 @Service
 public class MessageServiceImpl implements MessageService {

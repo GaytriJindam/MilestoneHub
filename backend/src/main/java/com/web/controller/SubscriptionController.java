@@ -1,15 +1,15 @@
 package com.web.controller;
 
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.User;
-import com.zosh.service.UserService;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.User;
+import com.web.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 
 
-    import com.zosh.domain.PlanType;
-import com.zosh.model.Subscription;
-import com.zosh.service.SubscriptionService;
+    import com.web.domain.PlanType;
+import com.web.model.Subscription;
+import com.web.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

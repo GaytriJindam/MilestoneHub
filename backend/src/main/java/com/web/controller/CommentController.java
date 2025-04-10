@@ -1,14 +1,14 @@
 package com.web.controller;
 
-import com.zosh.exception.IssueException;
-import com.zosh.exception.ProjectException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Comment;
-import com.zosh.model.User;
-import com.zosh.request.CreateCommentRequest;
-import com.zosh.response.MessageResponse;
-import com.zosh.service.CommentService;
-import com.zosh.service.UserService;
+import com.web.exception.IssueException;
+import com.web.exception.ProjectException;
+import com.web.exception.UserException;
+import com.web.model.Comment;
+import com.web.model.User;
+import com.web.request.CreateCommentRequest;
+import com.web.response.MessageResponse;
+import com.web.service.CommentService;
+import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

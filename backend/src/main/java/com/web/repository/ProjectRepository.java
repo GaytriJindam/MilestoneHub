@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.zosh.model.Project;
-import com.zosh.model.User;
+import com.web.model.Project;
+import com.web.model.User;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 	 List<Project> findByOwner(User owner);

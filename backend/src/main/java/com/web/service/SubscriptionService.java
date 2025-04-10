@@ -1,8 +1,8 @@
 package com.web.service;
 
-import com.zosh.domain.PlanType;
-import com.zosh.model.Subscription;
-import com.zosh.model.User;
+import com.web.domain.PlanType;
+import com.web.model.Subscription;
+import com.web.model.User;
 
 public interface SubscriptionService {
     Subscription createSubscription(User user);

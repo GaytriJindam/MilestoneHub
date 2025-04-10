@@ -1,8 +1,8 @@
 package com.web.service;
 
-import com.zosh.exception.IssueException;
-import com.zosh.exception.UserException;
-import com.zosh.model.Comment;
+import com.web.exception.IssueException;
+import com.web.exception.UserException;
+import com.web.model.Comment;
 
 import java.util.List;
 
