@@ -1,5 +1,8 @@
 🚀 WorkWise – Project Management System
-WorkWise is a powerful and intuitive project management system designed to help teams plan, collaborate, and deliver with efficiency. Whether you're managing software development, design sprints, or internal operations, WorkWise provides a centralized platform to organize projects, track progress, and communicate seamlessly.
+
+
+WorkWise is a powerful and intuitive project management system designed to help teams plan, collaborate, and deliver with efficiency. 
+Whether you're managing software development, design sprints, or internal operations, WorkWise provides a centralized platform to organize projects, track progress, and communicate seamlessly.
 
 ✨ Key Features
 
