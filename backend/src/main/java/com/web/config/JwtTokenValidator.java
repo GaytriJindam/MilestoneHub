@@ -27,33 +27,41 @@ public class JwtTokenValidator extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		String jwt = request.getHeader(JwtConstant.JWT_HEADER);
-		
-//		Bearer jkjkjkljkj
-		
-		if(jwt!=null) {
-			jwt=jwt.substring(7);
-			
+
+		String authHeader = request.getHeader(JwtConstant.JWT_HEADER); // Usually "Authorization"
+
+		if (authHeader != null && authHeader.startsWith("Bearer ")) {
+			String jwt = authHeader.substring(7); // Remove "Bearer "
+
 			try {
-				SecretKey key=Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
-				Claims claims= Jwts.parserBuilder().setSigningKey(key).build()
-						.parseClaimsJws(jwt).getBody();
-				String email=String.valueOf(claims.get("email"));
-				String authorities=String.valueOf(claims.get("authorities"));
-				
-				List<GrantedAuthority> auths =AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
-				
-				Authentication authentication=
-						new UsernamePasswordAuthenticationToken(
-								email,null, auths);
+				SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
+
+				Claims claims = Jwts.parserBuilder()
+						.setSigningKey(key)
+						.build()
+						.parseClaimsJws(jwt)
+						.getBody();
+
+				String email = String.valueOf(claims.get("email"));
+				String authorities = String.valueOf(claims.get("authorities"));
+
+				List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+
+				Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
+
 				SecurityContextHolder.getContext().setAuthentication(authentication);
-				
+
 			} catch (Exception e) {
-				throw new BadCredentialsException("invalid token...");
+				e.printStackTrace(); // Optional: log error
+				throw new BadCredentialsException("Invalid or expired token ❌");
 			}
+		} else {
+
+			 System.out.println("Authorization header missing or does not start with Bearer");
 		}
+
 		filterChain.doFilter(request, response);
-		
 	}
+
 
 }
