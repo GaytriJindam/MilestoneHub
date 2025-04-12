@@ -1,47 +1,19 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  CaretDownIcon,
-  MagnifyingGlassIcon,
-  MixerHorizontalIcon,
-} from "@radix-ui/react-icons";
+import { CaretDownIcon, MagnifyingGlassIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjects, searchProjects } from "@/redux/Project/Project.Action";
 import { useLocation, useNavigate } from "react-router-dom";
 import { tags } from "./filterData";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import FilterSheet from "./FilterSheet";
 
 const ProjectList = () => {
@@ -53,15 +25,13 @@ const ProjectList = () => {
   const tag = searchParams.get("tag");
   const [keyword, setKeyword] = useState("");
 
-  const { project,auth } = useSelector((store) => store);
+  const { project, auth } = useSelector((store) => store);
 
   useEffect(() => {
     dispatch(fetchProjects({ category, tag }));
-  }, [category, tag,auth.jwt]);
+  }, [category, tag, auth.jwt]);
 
   const handleFilterChange = (section, value) => {
-    console.log(value, section);
-
     if (value === "all") {
       searchParams.delete(section);
     } else {
@@ -70,112 +40,132 @@ const ProjectList = () => {
     const query = searchParams.toString();
     navigate({ search: query ? `?${query}` : "" });
   };
+
   const handleSearchChange = (e) => {
     setKeyword(e.target.value);
     if (e.target.value) {
       dispatch(searchProjects(e.target.value));
     }
   };
-  return (
-    <>
-      <div className="relative px-5 lg:px-0 lg:flex gap-5 justify-center py-5">
-        <section className="hidden lg:block">
-          <Card className="p-5 sticky top-10">
-            <div className="flex justify-between lg:w-[20rem]">
-              <p className="text-xl tracking-wider">filters</p>
-              <Button variant="ghost" size="icon">
-                <MixerHorizontalIcon />
-              </Button>
-            </div>
 
-            <CardContent className="mt-5 ">
-              <ScrollArea className="space-y-7 h-[70vh]">
-                <div>
-                  <h1 className="pb-3 text-gray-400 border-b">Category</h1>
-                  <div className="pt-5">
+  return (
+    <div className="relative px-4 lg:px-8 py-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+        {/* Mobile Filter Button */}
+        <div className="lg:hidden flex justify-between items-center mb-4">
+          <div className="relative flex-1 max-w-md">
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm"
+              placeholder="Search projects..."
+              onChange={handleSearchChange}
+            />
+          </div>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="ml-2">
+                <MixerHorizontalIcon className="h-4 w-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px]">
+              <FilterSheet />
+            </SheetContent>
+          </Sheet>
+        </div>
+        <aside className="hidden lg:block w-64 flex-shrink-0">
+          <Card className="shadow-lg border-0 rounded-xl overflow-hidden">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold text-gray-800">Filters</h2>
+                <Button variant="ghost" size="icon" className="text-gray-500 hover:text-gray-700">
+                  <MixerHorizontalIcon className="h-5 w-5" />
+                </Button>
+              </div>
+
+              <ScrollArea className="h-[calc(100vh-200px)] pr-3">
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">
+                      Category
+                    </h3>
                     <RadioGroup
-                      onValueChange={(value) =>
-                        handleFilterChange("category", value)
-                      }
-                      className="space-y-3"
+                      onValueChange={(value) => handleFilterChange("category", value)}
+                      className="space-y-2"
                       defaultValue={category || "all"}
                     >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="all" id="r1" />
-                        <Label htmlFor="r1">all</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="fullstack" id="r1" />
-                        <Label htmlFor="r1">full stack</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="frontend" id="r2" />
-                        <Label htmlFor="r2">frontend</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="backend" id="r3" />
-                        <Label htmlFor="r3">backend</Label>
-                      </div>
+                      {["all", "fullstack", "frontend", "backend"].map((cat) => (
+                        <div key={cat} className="flex items-center space-x-3">
+                          <RadioGroupItem value={cat} id={`cat-${cat}`} />
+                          <Label htmlFor={`cat-${cat}`} className="capitalize text-gray-700 cursor-pointer">
+                            {cat.replace(/([A-Z])/g, ' $1').trim()}
+                          </Label>
+                        </div>
+                      ))}
                     </RadioGroup>
                   </div>
-                </div>
-
-                <div className="pt-9">
-                  <h1 className="pb-3 text-gray-400 border-b">Tags</h1>
-
-                  <RadioGroup
-                    onValueChange={(value) => handleFilterChange("tag", value)}
-                    className="space-y-3 pt-5"
-                    defaultValue={tag || "all"}
-                  >
-                    {tags.map((item) => (
-                      <div key={item} className="flex items-center space-x-2">
-                        <RadioGroupItem value={item} id={`r-${item}`} />
-                        <Label htmlFor={`r-${item}`}>{item}</Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
+                  <div>
+                    <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3 pb-2 border-b border-gray-200">
+                      Tags
+                    </h3>
+                    <RadioGroup
+                      onValueChange={(value) => handleFilterChange("tag", value)}
+                      className="space-y-2"
+                      defaultValue={tag || "all"}
+                    >
+                      {tags.map((tagItem) => (
+                        <div key={tagItem} className="flex items-center space-x-3">
+                          <RadioGroupItem value={tagItem} id={`tag-${tagItem}`} />
+                          <Label htmlFor={`tag-${tagItem}`} className="capitalize text-gray-700 cursor-pointer">
+                            {tagItem}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
                 </div>
               </ScrollArea>
             </CardContent>
           </Card>
-        </section>
+        </aside>
+        <main className="flex-1">
 
-        <section className="w-full lg:w-[48rem]">
-          <div className="flex gap-2 items-center pb-5 justify-between">
-            <div className="relative p-0 w-full">
+          <div className="hidden lg:flex justify-between items-center mb-6">
+            <div className="relative w-full max-w-md">
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                className="w-[40%] rounded-fulls px-9"
-                placeholder="search project..."
+                className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm text-black"
+                placeholder="Search projects..."
                 onChange={handleSearchChange}
               />
-              <MagnifyingGlassIcon className="absolute top-3 left-4" />
             </div>
-
-            <Sheet className=" lg:hidden">
-              <SheetTrigger>
-                <Button className="" variant="ghost" size="icon">
-                  <MixerHorizontalIcon />
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <FilterSheet />
-              </SheetContent>
-            </Sheet>
           </div>
-          <div>
-            <div className="space-y-5 min-h-[74vh]">
-              {keyword
-                ? project.searchProjects.map((item) => (
-                    <ProjectCard item={item} key={item.id} />
-                  ))
-                : project.projects.map((item) => (
-                    <ProjectCard item={item} key={item.id} />
-                  ))}
-            </div>
+
+          <div className="space-y-4">
             {project.projects.length > 0 ? (
-              <div>
-                {/* <Pagination>
+              (keyword ? project.searchProjects : project.projects).map((item) => (
+                <ProjectCard 
+                  item={item} 
+                  key={item.id} 
+                  className="transition-all hover:scale-[1.01] hover:shadow-md"
+                />
+              ))
+            ) : (
+              <div className="flex flex-col items-center justify-center h-96 rounded-xl bg-white shadow-sm">
+                <div className="text-center space-y-2">
+                  <h3 className="text-lg font-medium text-gray-700">No projects found</h3>
+                  <p className="text-gray-500">
+                    {keyword 
+                      ? "Try a different search term" 
+                      : "Create a new project to get started"}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* {project.projects.length > 0 && (
+            <div className="mt-8">
+              <Pagination>
                 <PaginationContent>
                   <PaginationItem>
                     <PaginationPrevious href="#" />
@@ -195,17 +185,12 @@ const ProjectList = () => {
                     <PaginationNext href="#" />
                   </PaginationItem>
                 </PaginationContent>
-              </Pagination> */}
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-[80vh]">
-                <h1>No projects...</h1>
-              </div>
-            )}
-          </div>
-        </section>
+              </Pagination>
+            </div>
+          )} */}
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 
