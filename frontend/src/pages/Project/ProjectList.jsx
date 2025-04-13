@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { tags } from "./filterData";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import FilterSheet from "./FilterSheet";
+import { RocketIcon } from "@radix-ui/react-icons";
 
 const ProjectList = () => {
   const navigate = useNavigate();
@@ -45,25 +46,38 @@ const ProjectList = () => {
     setKeyword(e.target.value);
     if (e.target.value) {
       dispatch(searchProjects(e.target.value));
+    } else {
+      // Clear search results when input is empty
+      dispatch(fetchProjects({ category, tag }));
     }
   };
 
+  const filteredProjects = keyword ? project.searchProjects : project.projects;
+  const isEmptySearch = keyword && project.searchProjects.length === 0;
+
   return (
-    <div className="relative px-4 lg:px-8 py-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+    <div className="relative px-4 lg:px-8 py-6 min-h-screen bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-gray-50">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100/20 rounded-full filter blur-3xl -translate-x-1/4 -translate-y-1/4"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-100/20 rounded-full filter blur-3xl translate-x-1/4 translate-y-1/4"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 relative z-10">
         {/* Mobile Filter Button */}
         <div className="lg:hidden flex justify-between items-center mb-4">
           <div className="relative flex-1 max-w-md">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
-              className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm"
+              className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/50"
               placeholder="Search projects..."
+              value={keyword}
               onChange={handleSearchChange}
             />
           </div>
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="ml-2">
+              <Button variant="outline" size="icon" className="ml-2 bg-white shadow-sm">
                 <MixerHorizontalIcon className="h-4 w-4" />
               </Button>
             </SheetTrigger>
@@ -72,8 +86,10 @@ const ProjectList = () => {
             </SheetContent>
           </Sheet>
         </div>
+        
+        {/* Desktop Filters */}
         <aside className="hidden lg:block w-64 flex-shrink-0">
-          <Card className="shadow-lg border-0 rounded-xl overflow-hidden">
+          <Card className="shadow-lg border-0 rounded-xl overflow-hidden bg-white/80 backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold text-gray-800">Filters</h2>
@@ -127,67 +143,62 @@ const ProjectList = () => {
             </CardContent>
           </Card>
         </aside>
+        
+        {/* Main Content */}
         <main className="flex-1">
-
           <div className="hidden lg:flex justify-between items-center mb-6">
             <div className="relative w-full max-w-md">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm text-black"
+                className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/50"
                 placeholder="Search projects..."
+                value={keyword}
                 onChange={handleSearchChange}
               />
             </div>
           </div>
 
           <div className="space-y-4">
-            {project.projects.length > 0 ? (
-              (keyword ? project.searchProjects : project.projects).map((item) => (
+            {isEmptySearch ? (
+              <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100">
+                <div className="text-center space-y-4 max-w-md">
+                  <RocketIcon className="h-12 w-12 mx-auto text-gray-400" />
+                  <h3 className="text-xl font-medium text-gray-700">No projects found</h3>
+                  <p className="text-gray-500">
+                    We couldn't find any projects matching <span className="font-medium text-gray-700">"{keyword}"</span>
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    Try adjusting your search or filter to find what you're looking for
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    className="mt-4"
+                    onClick={() => setKeyword("")}
+                  >
+                    Clear search
+                  </Button>
+                </div>
+              </div>
+            ) : filteredProjects.length > 0 ? (
+              filteredProjects.map((item) => (
                 <ProjectCard 
                   item={item} 
                   key={item.id} 
-                  className="transition-all hover:scale-[1.01] hover:shadow-md"
+                  className="transition-all hover:scale-[1.01] hover:shadow-md bg-white/80 backdrop-blur-sm"
                 />
               ))
             ) : (
-              <div className="flex flex-col items-center justify-center h-96 rounded-xl bg-white shadow-sm">
-                <div className="text-center space-y-2">
-                  <h3 className="text-lg font-medium text-gray-700">No projects found</h3>
+              <div className="flex flex-col items-center justify-center py-16 px-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100">
+                <div className="text-center space-y-4">
+                  <RocketIcon className="h-12 w-12 mx-auto text-gray-400" />
+                  <h3 className="text-xl font-medium text-gray-700">No projects yet</h3>
                   <p className="text-gray-500">
-                    {keyword 
-                      ? "Try a different search term" 
-                      : "Create a new project to get started"}
+                    Get started by creating your first project
                   </p>
                 </div>
               </div>
             )}
           </div>
-
-          {/* {project.projects.length > 0 && (
-            <div className="mt-8">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious href="#" />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext href="#" />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </div>
-          )} */}
         </main>
       </div>
     </div>
