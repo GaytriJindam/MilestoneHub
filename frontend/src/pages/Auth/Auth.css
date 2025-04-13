@@ -18,6 +18,8 @@
         #25252b 100%
     );
     font-family: "Poppins", sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
 .box {
@@ -30,7 +32,6 @@
     align-items: center;
     overflow: hidden;
 }
-
 
 .box::before {
     content: "";
@@ -60,4 +61,14 @@
     flex-direction: column;
     border-radius: 10px;
     z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .loginContainer {
+        background: #f6f7f9;
+    }
+    .loginContainer > div:first-child {
+        display: none;
+    }
 }
