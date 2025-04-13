@@ -53,7 +53,7 @@ export function CreateIssueForm({ status }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 bg-black p-4 rounded-md text-white"
+        className="space-y-4 bg-black p-6 rounded-md text-white"
       >
         <FormField
           control={form.control}
@@ -71,6 +71,7 @@ export function CreateIssueForm({ status }) {
             </FormItem>
           )}
         />
+  
         <FormField
           control={form.control}
           name="description"
@@ -87,12 +88,17 @@ export function CreateIssueForm({ status }) {
             </FormItem>
           )}
         />
+  
         <DialogClose>
-          <Button className="bg-white text-black hover:bg-gray-300" type="submit">
+          <Button
+            type="submit"
+            className="bg-white text-black hover:bg-gray-300 transition-colors duration-200"
+          >
             Create Issue
           </Button>
         </DialogClose>
       </form>
     </Form>
   );
+  
 }
