@@ -77,7 +77,7 @@ export function IssueList({ title, status }) {
         </CardFooter>
       </Card>
       
-      <DialogContent className="max-w-md border-none bg-white/90 backdrop-blur-sm rounded-lg">
+      <DialogContent className="max-w-md border-none bg-black backdrop-blur-sm rounded-lg">
         <DialogHeader>
           <DialogTitle className="text-xl">Create New Issue</DialogTitle>
         </DialogHeader>
