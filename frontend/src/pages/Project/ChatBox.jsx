@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -12,7 +12,7 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { io } from "socket.io-client";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
@@ -25,7 +25,7 @@ const ChatBox = () => {
 
   useEffect(() => {
     dispatch(fetchChatByProject(id));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (chat.chat) {
@@ -34,6 +34,8 @@ const ChatBox = () => {
   }, [chat.chat]);
 
   const handleSendMessage = () => {
+    if (message.trim() === "") return;
+    
     dispatch(
       sendMessage({
         message: {
@@ -47,140 +49,119 @@ const ChatBox = () => {
     setMessage("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   useEffect(() => {
+    // Auto-scroll to bottom when new messages arrive
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollIntoView({ behavior: "smooth" });
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chat.messages]);
 
-  // ---------------------------------
-
-  // const [stompClient, setStompClient] = useState(null);
-  // // const [messages, setMessages] = useState([]);
-
-  // const onConnect = (frem) => {
-  //   console.log("connect frem : ", frem);
-  // };
-  // const onErr = (err) => {
-  //   console.log("error when connect ", err);
-  // };
-  // useEffect(() => {
-  //   const sock = new SockJS("http://localhost:5454/ws");
-  //   const stomp = Stomp.over(sock);
-  //   setStompClient(stomp);
-
-  //   stomp.connect({}, onConnect, onErr);
-
-  //   // return () => {
-  //   //   if (stomp) {
-  //   //     stomp.disconnect();
-  //   //   }
-  //   // };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (stompClient && auth.reqUser && chat.chat) {
-  //     const subscription = stompClient.subscribe(
-  //       `/user/${chat.chat?.id}/private`,
-  //       onMessageRecive
-  //     );
-
-  //     return () => {
-  //       subscription.unsubscribe();
-  //     };
-  //   }
-  // });
-
-  // const onMessageRecive = (payload) => {
-  //   console.log("onMessageRecive ............. -----------", payload);
-
-  //   console.log("recive message -  - - - - - - -  -", JSON.parse(payload.body));
-
-  //   const recievedMessage = JSON.parse(payload.body);
-
-  //   dispatch(messageRecived(recievedMessage))
-  //   setMessages([...messages, recievedMessage]);
-  // };
-
   const sendMessageToServer = (message) => {
-    console.log(message)
-    // if (stompClient && message) {
-    //   stompClient.send(
-    //     `/app/chat/${chat.chat?.id.toString()}`,
-    //     {},
-    //     JSON.stringify(message)
-    //   );
-    // }
+    console.log(message);
   };
 
-  // useEffect(() => {
-  //   // Scroll to the bottom when 'messages' change or component mounts
-  //   if (chatContainerRef.current) {
-  //     chatContainerRef.current.scrollTop =
-  //       chatContainerRef.current.scrollHeight;
-  //   }
-  // }, [messages]);
-
-  
   return (
-    <div className="sticky">
-      <div className="border rounded-lg">
-        <h1 className="border-b p-5">Chat Box</h1>
-        <ScrollArea className="h-[32rem] w-full p-5 flex gap-3 flex-col">
-          {/* <div>
-            <p className="py-2 px-5 border rounded-se-xl rounded-s-xl">you message</p>
-          </div> */}
+    <div className="h-full flex flex-col bg-white/80 backdrop-blur-sm rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      {/* Chat Header */}
+      <div className="border-b p-4 bg-gradient-to-r from-blue-50 to-purple-50">
+        <h1 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          </span>
+          Project Chat
+        </h1>
+      </div>
 
-          {chat.messages?.map((item, i) =>
-            item.sender.id == auth.user.id ? (
-              <div
-                ref={chatContainerRef}
-                key={item}
-                className="flex gap-2 mb-2"
+      {/* Messages Area */}
+      <ScrollArea 
+        ref={chatContainerRef} 
+        className="flex-1 p-4 space-y-4"
+      >
+        <AnimatePresence initial={false}>
+          {chat.messages?.length > 0 ? (
+            chat.messages.map((item, i) => (
+              <motion.div
+                key={`${item.id}-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                className={`flex gap-3 ${item.sender.id === auth.user.id ? "justify-end" : "justify-start"}`}
               >
-                <Avatar>
-                  <AvatarFallback>{item.sender.fullName[0]}</AvatarFallback>
-                </Avatar>
+                {item.sender.id !== auth.user.id && (
+                  <Avatar className="h-9 w-9">
+                    <AvatarImage src={item.sender.profilePicture} />
+                    <AvatarFallback className="bg-purple-100 text-purple-800">
+                      {item.sender.fullName[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+                
                 <div
-                  className={`space-y-2 py-2 px-5 border rounded-ss-2xl rounded-e-xl`}
+                  className={`max-w-[75%] rounded-2xl p-3 ${item.sender.id === auth.user.id 
+                    ? "bg-primary text-white rounded-br-none" 
+                    : "bg-gray-100 text-gray-800 rounded-bl-none"}`}
                 >
-                  <p>{item.sender?.fullName}</p>
-                  <p className="text-gray-300">{item.content}</p>
+                  {item.sender.id !== auth.user.id && (
+                    <p className="font-medium text-sm mb-1">
+                      {item.sender.fullName}
+                    </p>
+                  )}
+                  <p className="text-sm">{item.content}</p>
+                  <p className="text-xs mt-1 opacity-70 text-right">
+                    {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
                 </div>
+                
+                {item.sender.id === auth.user.id && (
+                  <Avatar className="h-9 w-9">
+                    <AvatarImage src={item.sender.profilePicture} />
+                    <AvatarFallback className="bg-blue-100 text-blue-800">
+                      {item.sender.fullName[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+              </motion.div>
+            ))
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-center p-8">
+              <div className="bg-blue-50 p-4 rounded-full mb-3">
+                <PaperPlaneIcon className="h-6 w-6 text-blue-400" />
               </div>
-            ) : (
-              <div
-                ref={chatContainerRef}
-                key={item}
-                className="flex mb-2 gap-2 justify-end "
-              >
-                <div
-                  className={`space-y-2 py-2 px-5 border rounded-se-2xl rounded-s-xl`}
-                >
-                  <p>{item.sender?.fullName}</p>
-                  <p className="text-gray-300">{item.content}</p>
-                </div>
-                <Avatar>
-                  <AvatarFallback>{item.sender.fullName[0]}</AvatarFallback>
-                </Avatar>
-              </div>
-            )
+              <h3 className="text-lg font-medium text-gray-700">No messages yet</h3>
+              <p className="text-gray-500 text-sm mt-1">
+                Start the conversation with your team
+              </p>
+            </div>
           )}
-        </ScrollArea>
-        <div className="relative p-0">
+        </AnimatePresence>
+      </ScrollArea>
+
+      {/* Message Input */}
+      <div className="border-t p-3 bg-gray-50">
+        <div className="relative">
           <Input
             value={message}
             onChange={handleMessageChange}
-            placeholder="type message..."
-            className="py-7 border-t outline-none  focus:outline-none focus:ring-0 rounded-none border-b-0 border-x-0"
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message here..."
+            className="pr-12 py-5 rounded-full bg-white shadow-sm border-gray-300 focus-visible:ring-primary"
           />
           <Button
             onClick={handleSendMessage}
-            className="absolute right-2 top-3 rounded-full"
+            disabled={message.trim() === ""}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-10 h-10"
             size="icon"
-            variant="ghost"
+            variant={message.trim() === "" ? "ghost" : "default"}
           >
-            <PaperPlaneIcon />
+            <PaperPlaneIcon className="h-4 w-4" />
           </Button>
         </div>
       </div>
