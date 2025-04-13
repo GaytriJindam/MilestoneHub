@@ -150,7 +150,7 @@ const ProjectList = () => {
             <div className="relative w-full max-w-md">
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
-                className="pl-10 pr-4 py-2 rounded-full bg-white shadow-sm border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/50"
+                className="pl-10 pr-4 py-2 text-black rounded-full bg-white shadow-sm border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/50"
                 placeholder="Search projects..."
                 value={keyword}
                 onChange={handleSearchChange}
