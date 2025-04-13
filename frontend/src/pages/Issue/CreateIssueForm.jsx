@@ -36,9 +36,8 @@ export function CreateIssueForm({ status }) {
       description: "",
     },
   });
-  const onSubmit = (data) => {
-    // Handle form submission here
 
+  const onSubmit = (data) => {
     console.log(data);
     dispatch(
       createIssue({
@@ -52,17 +51,23 @@ export function CreateIssueForm({ status }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4 bg-black p-4 rounded-md text-white"
+      >
         <FormField
           control={form.control}
           name="issueName"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="what needs to be done?" {...field} />
+                <Input
+                  className="bg-zinc-900 text-white placeholder-gray-400 border border-gray-600 focus:ring-0 focus:border-white"
+                  placeholder="what needs to be done?"
+                  {...field}
+                />
               </FormControl>
-
-              <FormMessage />
+              <FormMessage className="text-red-400" />
             </FormItem>
           )}
         />
@@ -72,14 +77,20 @@ export function CreateIssueForm({ status }) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="describe your task..." {...field} />
+                <Input
+                  className="bg-zinc-900 text-white placeholder-gray-400 border border-gray-600 focus:ring-0 focus:border-white"
+                  placeholder="describe your task..."
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-400" />
             </FormItem>
           )}
         />
         <DialogClose>
-          <Button type="submit">Create Issue</Button>
+          <Button className="bg-white text-black hover:bg-gray-300" type="submit">
+            Create Issue
+          </Button>
         </DialogClose>
       </form>
     </Form>
